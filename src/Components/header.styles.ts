@@ -5,24 +5,34 @@ export const TopHeader = styled(motion.header)`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 80px;
   font-size: 16px;
-  padding: 20px 60px;
+  padding: 20px 0;
+  z-index: 9999;
+  overflow: hidden;
 `;
 
 export const Nav = styled.nav`
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   height: 100%;
+  @media screen and (min-width: 768px) {
+display: flex;
+justify-content: space-between;
+    }
 `;
 
 export const Col = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  &.icon {
+    margin-top: 15px;
+    justify-content: right;
+    @media screen and (min-width: 768px) {
+      margin-top: 0;
+      justify-content: left;
+    }
+  }
 `;
 
 export const Logo = styled(motion.svg)`
@@ -39,6 +49,8 @@ export const Logo = styled(motion.svg)`
 export const Items = styled.ul`
   display: flex;
   align-items: center;
+
+  font-size: 16px;
 `;
 
 export const Item = styled.li`
@@ -49,6 +61,9 @@ export const Item = styled.li`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  &:last-child{
+    margin-right: 0;
+  }
   &:hover {
     color: ${(props) => props.theme.white.lighter};
   }
