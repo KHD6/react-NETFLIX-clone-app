@@ -343,6 +343,7 @@ export const PosterBox = styled.div`
   top: 5%;
   left: 50%;
   transform: translate(-50%, 0);
+  z-index: 2;
   @media screen and (min-width: 768px) {
     top: 40%;
     left: 5%;
@@ -457,6 +458,7 @@ export const OverviewOriginalTitle = styled.p`
     @media screen and (min-width: 1024px) {
       width: 35px;
       height: 35px;
+      line-height: 35px;
     }
   }
 `;
@@ -511,26 +513,28 @@ export const Star = styled.span`
 `;
 
 export const OverviewGenres = styled.ul`
-  display: flex;
-  justify-content: center;
+  display: grid;
+  align-items: center;
+  justify-content: space-between;
+  grid-template-columns: repeat(3, 2fr);
   margin-bottom: 20px;
+  font-size: 18px;
   @media screen and (min-width: 768px) {
     width: calc(100% - 290px);
-    margin: 0 auto 10px 220px;
-    justify-content: left;
+    margin: 0 0 10px 220px;
+    grid-template-columns: repeat(2, 2fr);
   }
   @media screen and (min-width: 1024px) {
-    width: calc(100% - 370px);
-    margin: 0 auto 40px 305px;
+    width: calc(100% - 290px);
+    margin: 0 0 40px 305px;
   }
   @media screen and (min-width: 1440px) {
-    margin: 0 auto 80px 305px;
+    margin: 0 0 80px 305px;
+    grid-template-columns: repeat(3, 2fr);
   }
   @media screen and (min-width: 1920px) {
     width: 65%;
-  }
-  li{
-    margin-right: 10px;
+    grid-template-columns: repeat(4, 2fr);
   }
 `;
 

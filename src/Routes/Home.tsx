@@ -122,11 +122,14 @@ function Home() {
     return () => window.removeEventListener("resize", updateOffset);
   }, []);
   const navigate = useNavigate();
-  const bigAiringTodayMatch = useMatch(
-    "/react-NETFLIX-clone-app/tv/airingtoday/:movieId"
+  const bigNowMovieMatch = useMatch(
+    "/react-NETFLIX-clone-app/movies/nowplaying/:movieId"
+  );
+  const bigUpcomingMovieMatch = useMatch(
+    "/react-NETFLIX-clone-app/movies/upcoming/:movieId"
   );
   const bigTopRatedMovieMatch = useMatch(
-    "/react-NETFLIX-clone-app/tv/toprated/:movieId"
+    "/react-NETFLIX-clone-app/movies/toprated/:movieId"
   );
   const [leaving, setLeaving] = useState(false);
   const windowWidth = useWindowWidth();
@@ -241,11 +244,18 @@ function Home() {
     setSelectedMovieId(null);
   };
 
-  const AiringTodayClickedMovie =
-    bigAiringTodayMatch?.params.movieId &&
+  const nowClickedMovie =
+    bigNowMovieMatch?.params.movieId &&
     nowPlayingData?.results.find(
       (nowPlayingData) =>
-        nowPlayingData.id + "" === bigAiringTodayMatch.params.movieId
+        nowPlayingData.id + "" === bigNowMovieMatch.params.movieId
+    );
+
+  const upcomingClickedMovie =
+    bigUpcomingMovieMatch?.params.movieId &&
+    upcomingData?.results.find(
+      (upcomingData) =>
+        upcomingData.id + "" === bigUpcomingMovieMatch.params.movieId
     );
 
   const topRatedClickedMovie =
@@ -401,7 +411,9 @@ function Home() {
                   <OverviewTitle>{detailsData?.title}</OverviewTitle>
                   <OverviewOriginalTitle>
                     <span>( 원어 : {detailsData?.original_title})</span>
-                    <span>{detailsData?.original_language}</span>
+                    <span>
+                      {detailsData?.original_language}
+                    </span>
                   </OverviewOriginalTitle>
                   <OverviewTime>
                     <span>{detailsData?.release_date}</span>{" "}
@@ -518,13 +530,15 @@ function Home() {
             </ContentBox>
           </Inner>
           <AnimatePresence>
-            {bigAiringTodayMatch
+            {bigNowMovieMatch
+              ? modalPopUp(choiceMovie, bigNowMovieMatch, nowClickedMovie)
+              : bigUpcomingMovieMatch
               ? modalPopUp(
                   choiceMovie,
-                  bigAiringTodayMatch,
-                  bigAiringTodayMatch
+                  bigUpcomingMovieMatch,
+                  upcomingClickedMovie
                 )
-              : bigAiringTodayMatch
+              : bigTopRatedMovieMatch
               ? modalPopUp(
                   choiceMovie,
                   bigTopRatedMovieMatch,
