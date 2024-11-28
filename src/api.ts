@@ -4,7 +4,8 @@ interface IMovie {
   id: number;
   backdrop_path: string;
   poster_path: string;
-  title: string;
+  title?: string;
+  name?: string;
   overview: string;
 }
 
@@ -77,13 +78,16 @@ export interface IGetMoviesDetails {
   genres: genres[];
   id: string;
   original_language: string;
-  original_title: string;
-  title: string;
+  original_title?: string;
+  original_name?: string;
+  title?: string;
+  name?: string;
   tagline: string;
   overview: string;
   vote_average: number;
   runtime: string;
-  release_date: string;
+  release_date?: string;
+  first_air_date?: string;
 }
 
 export function getMoviesDetails(id: number) {
@@ -100,3 +104,45 @@ export function getMoviesDetails(id: number) {
     res.json()
   );
 }
+
+export function getTvAiringToday() {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZGUxZjI5YTVlMGQxY2VjNmVkYTYzMmMwNTVkYmE3YyIsIm5iZiI6MTczMjcwMjgzMC4xMjI2MzkyLCJzdWIiOiI2NzNiNTBjMzgzYjY2NmE0ZTlhMmRhMDMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Z8xLPlJKKTLtrJqRULsSLIapWcET3gyVaBGFScHZaIk",
+    },
+  };
+
+  return fetch(
+    `${BASE_PATH}/tv/airing_today?language=en_US&page=1`,
+    options
+  ).then((res) => res.json());
+}
+
+export function getTvTopRated() {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZGUxZjI5YTVlMGQxY2VjNmVkYTYzMmMwNTVkYmE3YyIsIm5iZiI6MTczMjcwMjgzMC4xMjI2MzkyLCJzdWIiOiI2NzNiNTBjMzgzYjY2NmE0ZTlhMmRhMDMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Z8xLPlJKKTLtrJqRULsSLIapWcET3gyVaBGFScHZaIk'
+    }
+  };
+  
+  return fetch(`${BASE_PATH}/tv/top_rated?language=ko-KR&page=1`, options)
+    .then(res => res.json())
+}
+
+  export function getTvDetails(id: number) {
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZGUxZjI5YTVlMGQxY2VjNmVkYTYzMmMwNTVkYmE3YyIsIm5iZiI6MTczMjcwMjgzMC4xMjI2MzkyLCJzdWIiOiI2NzNiNTBjMzgzYjY2NmE0ZTlhMmRhMDMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Z8xLPlJKKTLtrJqRULsSLIapWcET3gyVaBGFScHZaIk'
+      }
+    };
+    
+    return fetch(`${BASE_PATH}/tv/${id}?language=ko-KR`, options)
+      .then(res => res.json())
+  }

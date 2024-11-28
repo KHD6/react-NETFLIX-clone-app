@@ -529,6 +529,9 @@ export const OverviewGenres = styled.ul`
   @media screen and (min-width: 1920px) {
     width: 65%;
   }
+  li{
+    margin-right: 10px;
+  }
 `;
 
 export const OverviewTagline = styled.p`
@@ -548,6 +551,7 @@ export const OverviewTagline = styled.p`
 `;
 
 export const Overviewtxt = styled.p`
+font-size: 17px;
   margin-bottom: 100px;
   text-align: left;
   line-height: 1.4;

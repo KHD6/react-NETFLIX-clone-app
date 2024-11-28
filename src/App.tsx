@@ -14,8 +14,14 @@ function App() {
           <Route path="movies/upcoming/:id" element={<Home />} />
           <Route path="movies/toprated/:id" element={<Home />} />
         </Route>
-        <Route path="/react-NETFLIX-clone-app/tv" element={<Tv />}></Route>
-        <Route path="/react-NETFLIX-clone-app/search" element={<Search />}></Route>
+        <Route path="/react-NETFLIX-clone-app/tv/" element={<Tv />}>
+          <Route path="airingtoday/:id" element={<Home />} />
+          <Route path="toprated/:id" element={<Home />} />
+        </Route>
+        <Route
+          path="/react-NETFLIX-clone-app/search"
+          element={<Search />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );

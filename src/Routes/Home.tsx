@@ -122,14 +122,11 @@ function Home() {
     return () => window.removeEventListener("resize", updateOffset);
   }, []);
   const navigate = useNavigate();
-  const bigNowMovieMatch = useMatch(
-    "/react-NETFLIX-clone-app/movies/nowplaying/:movieId"
-  );
-  const bigUpcomingMovieMatch = useMatch(
-    "/react-NETFLIX-clone-app/movies/upcoming/:movieId"
+  const bigAiringTodayMatch = useMatch(
+    "/react-NETFLIX-clone-app/tv/airingtoday/:movieId"
   );
   const bigTopRatedMovieMatch = useMatch(
-    "/react-NETFLIX-clone-app/movies/toprated/:movieId"
+    "/react-NETFLIX-clone-app/tv/toprated/:movieId"
   );
   const [leaving, setLeaving] = useState(false);
   const windowWidth = useWindowWidth();
@@ -244,18 +241,11 @@ function Home() {
     setSelectedMovieId(null);
   };
 
-  const nowClickedMovie =
-    bigNowMovieMatch?.params.movieId &&
+  const AiringTodayClickedMovie =
+    bigAiringTodayMatch?.params.movieId &&
     nowPlayingData?.results.find(
       (nowPlayingData) =>
-        nowPlayingData.id + "" === bigNowMovieMatch.params.movieId
-    );
-
-  const upcomingClickedMovie =
-    bigUpcomingMovieMatch?.params.movieId &&
-    upcomingData?.results.find(
-      (upcomingData) =>
-        upcomingData.id + "" === bigUpcomingMovieMatch.params.movieId
+        nowPlayingData.id + "" === bigAiringTodayMatch.params.movieId
     );
 
   const topRatedClickedMovie =
@@ -411,9 +401,7 @@ function Home() {
                   <OverviewTitle>{detailsData?.title}</OverviewTitle>
                   <OverviewOriginalTitle>
                     <span>( 원어 : {detailsData?.original_title})</span>
-                    <span>
-                      {detailsData?.original_language}
-                    </span>
+                    <span>{detailsData?.original_language}</span>
                   </OverviewOriginalTitle>
                   <OverviewTime>
                     <span>{detailsData?.release_date}</span>{" "}
@@ -425,7 +413,7 @@ function Home() {
                   </OverviewStars>
                   <OverviewGenres>
                     {detailsData?.genres.map((genre) => (
-                      <li key={genre.id}>{genre.name}</li>
+                      <li key={genre.id}>「{genre.name}」</li>
                     ))}
                   </OverviewGenres>
                   <OverviewTagline>{detailsData?.tagline}</OverviewTagline>
@@ -530,15 +518,13 @@ function Home() {
             </ContentBox>
           </Inner>
           <AnimatePresence>
-            {bigNowMovieMatch
-              ? modalPopUp(choiceMovie, bigNowMovieMatch, nowClickedMovie)
-              : bigUpcomingMovieMatch
+            {bigAiringTodayMatch
               ? modalPopUp(
                   choiceMovie,
-                  bigUpcomingMovieMatch,
-                  upcomingClickedMovie
+                  bigAiringTodayMatch,
+                  bigAiringTodayMatch
                 )
-              : bigTopRatedMovieMatch
+              : bigAiringTodayMatch
               ? modalPopUp(
                   choiceMovie,
                   bigTopRatedMovieMatch,
