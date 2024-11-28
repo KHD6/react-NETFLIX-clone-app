@@ -5,6 +5,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { darkTheme } from "./theme";
 import { RecoilRoot } from "recoil";
+import "./css/font.css";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');

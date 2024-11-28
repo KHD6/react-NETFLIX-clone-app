@@ -11,7 +11,6 @@ import {
   Banner,
   BigCover,
   BigMovie,
-  BigOverview,
   BigTitle,
   Box,
   ContentBox,
@@ -23,6 +22,13 @@ import {
   NextBtn,
   Overlay,
   Overview,
+  OverviewGenres,
+  OverviewOriginalTitle,
+  OverviewStars,
+  OverviewTagline,
+  OverviewTime,
+  OverviewTitle,
+  Overviewtxt,
   PlayBtn,
   PopUp,
   Poster,
@@ -40,7 +46,6 @@ import { Inner, makeImagePath } from "../utilities";
 import { AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useMatch, useNavigate } from "react-router-dom";
-import { useScroll } from "framer-motion";
 
 const useWindowWidth = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -402,20 +407,30 @@ function Home() {
                 </PlayBtn>
               </PosterBox>
               <DetailBox>
-                <BigOverview>{detailsData?.title}</BigOverview>
-                <div>{detailsData?.original_title}</div>
-                <div>{detailsData?.original_language}</div>
-                <div>{detailsData?.tagline}</div>
-                <BigOverview>{detailsData?.overview}</BigOverview>
-                {detailsData?.genres.map((genre) => (
-                  <div key={genre.id}>{genre.name}</div>
-                ))}
-                <div>{detailsData?.runtime}분</div>
-                <div>{detailsData?.release_date}</div>
-                <div className="star-rating">
-                  {renderStars(detailsData?.vote_average ?? 0)}(
-                  {detailsData?.vote_average.toFixed(1) ?? 0.0})
-                </div>
+                <Inner className="inner">
+                  <OverviewTitle>{detailsData?.title}</OverviewTitle>
+                  <OverviewOriginalTitle>
+                    <span>( 원어 : {detailsData?.original_title})</span>
+                    <span>
+                      {detailsData?.original_language}
+                    </span>
+                  </OverviewOriginalTitle>
+                  <OverviewTime>
+                    <span>{detailsData?.release_date}</span>{" "}
+                    <span>{detailsData?.runtime} 분</span>
+                  </OverviewTime>
+                  <OverviewStars className="star-rating">
+                    {renderStars(detailsData?.vote_average ?? 0)}(
+                    {detailsData?.vote_average.toFixed(1) ?? 0.0})
+                  </OverviewStars>
+                  <OverviewGenres>
+                    {detailsData?.genres.map((genre) => (
+                      <li key={genre.id}>{genre.name}</li>
+                    ))}
+                  </OverviewGenres>
+                  <OverviewTagline>{detailsData?.tagline}</OverviewTagline>
+                  <Overviewtxt>{detailsData?.overview}</Overviewtxt>
+                </Inner>
               </DetailBox>
             </>
           )}
@@ -486,7 +501,7 @@ function Home() {
           <Inner>
             <ContentBox>
               {slide(
-                "현재 상영중",
+                "Now Playing",
                 "now",
                 nowIndex,
                 nowPlayingData,
@@ -495,7 +510,7 @@ function Home() {
                 nowNextBtn
               )}
               {slide(
-                "개봉예정",
+                "Upcoming",
                 "upcoming",
                 comingIndex,
                 upcomingData,
@@ -504,7 +519,7 @@ function Home() {
                 comingNextBtn
               )}
               {slide(
-                "높은 인기",
+                "Top Rated",
                 "toprated",
                 topRatedIndex,
                 topRatedData,
