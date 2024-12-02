@@ -49,6 +49,7 @@ export const Overview = styled.p`
   font-size: 12px;
   font-family: Pretendard-Regular;
   margin-bottom: 30px;
+  text-shadow: 0 0 2px #2f2f2f;
   @media screen and (min-width: 768px) {
     max-width: 50%;
     font-size: 15px;
@@ -269,6 +270,14 @@ export const Info = styled(motion.div)`
   }
 `;
 
+export const NoDataText = styled(motion.div)`
+  font-size: 16px;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+`;
+
 export const PopUp = styled(motion.div)`
   position: fixed;
   top: 0;
@@ -336,33 +345,44 @@ export const BigCover = styled.div`
   min-height: 300px;
   background-size: cover;
   background-position: center;
+  position: absolute;
+  z-index: -1;
+  @media screen and (min-width: 768px) {
+    position: static;
+  }
 `;
 
+//수정중
 export const PosterBox = styled.div`
-  position: absolute;
-  top: 5%;
-  left: 50%;
-  transform: translate(-50%, 0);
-  z-index: 2;
+  width: 260px;
+  margin: 50px auto 20px;
   @media screen and (min-width: 768px) {
-    top: 40%;
+    top: 245px;
     left: 5%;
+    position: absolute;
     transform: translate(0, -50%);
+    z-index: 2;
+    width: 200px;
+  }
+  @media screen and (min-width: 1024px) {
+    top: 240px;
+    left: 5%;
+    position: absolute;
+    transform: translate(0, -50%);
+    z-index: 2;
+    width: 280px;
   }
 `;
 
 export const Poster = styled.div`
-  width: 260px;
   height: 380px;
   background-size: cover;
   background-position: center;
   margin-bottom: 20px;
   @media screen and (min-width: 768px) {
-    width: 200px;
     height: 300px;
   }
   @media screen and (min-width: 1024px) {
-    width: 280px;
     height: 400px;
   }
 `;
@@ -376,10 +396,7 @@ export const BigTitle = styled.h4`
 `;
 
 export const DetailBox = styled.div`
-font-family: Pretendard-Regular;
-  position: absolute;
-  top: 60%;
-  left: 0;
+  font-family: Pretendard-Regular;
   color: ${(props) => props.theme.white.lighter};
   text-align: center;
   @media screen and (min-width: 768px) {
@@ -555,7 +572,7 @@ export const OverviewTagline = styled.p`
 `;
 
 export const Overviewtxt = styled.p`
-font-size: 17px;
+  font-size: 17px;
   margin-bottom: 100px;
   text-align: left;
   line-height: 1.4;

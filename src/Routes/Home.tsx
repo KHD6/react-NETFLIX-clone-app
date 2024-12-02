@@ -20,6 +20,7 @@ import {
   Info,
   Loader,
   NextBtn,
+  NoDataText,
   Overlay,
   Overview,
   OverviewGenres,
@@ -247,22 +248,19 @@ function Home() {
   const nowClickedMovie =
     bigNowMovieMatch?.params.movieId &&
     nowPlayingData?.results.find(
-      (nowPlayingData) =>
-        nowPlayingData.id + "" === bigNowMovieMatch.params.movieId
+      (Data) => Data.id + "" === bigNowMovieMatch.params.movieId
     );
 
   const upcomingClickedMovie =
     bigUpcomingMovieMatch?.params.movieId &&
     upcomingData?.results.find(
-      (upcomingData) =>
-        upcomingData.id + "" === bigUpcomingMovieMatch.params.movieId
+      (Data) => Data.id + "" === bigUpcomingMovieMatch.params.movieId
     );
 
   const topRatedClickedMovie =
     bigTopRatedMovieMatch?.params.movieId &&
     topRatedData?.results.find(
-      (nowPlayingData) =>
-        nowPlayingData.id + "" === bigTopRatedMovieMatch.params.movieId
+      (Data) => Data.id + "" === bigTopRatedMovieMatch.params.movieId
     );
 
   const renderStars = (rating: number) => {
@@ -333,6 +331,9 @@ function Home() {
                   onClick={() => clicked(movie.id)}
                   bgphoto={makeImagePath(movie.backdrop_path, "w500")}
                 >
+                  {movie.backdrop_path === null ? (
+                    <NoDataText>이미지 없음</NoDataText>
+                  ) : null}
                   <Info variants={infoVariants}>
                     <BigTitle>{movie.title}</BigTitle>
                   </Info>
@@ -411,9 +412,7 @@ function Home() {
                   <OverviewTitle>{detailsData?.title}</OverviewTitle>
                   <OverviewOriginalTitle>
                     <span>( 원어 : {detailsData?.original_title})</span>
-                    <span>
-                      {detailsData?.original_language}
-                    </span>
+                    <span>{detailsData?.original_language}</span>
                   </OverviewOriginalTitle>
                   <OverviewTime>
                     <span>{detailsData?.release_date}</span>{" "}

@@ -20,6 +20,7 @@ import {
   Info,
   Loader,
   NextBtn,
+  NoDataText,
   Overlay,
   Overview,
   OverviewGenres,
@@ -309,6 +310,9 @@ function Tv() {
                   onClick={() => clicked(movie.id)}
                   bgphoto={makeImagePath(movie.backdrop_path, "w500")}
                 >
+                  {movie.backdrop_path === null ? (
+                    <NoDataText>이미지 없음</NoDataText>
+                  ) : null}
                   <Info variants={infoVariants}>
                     <BigTitle>{movie.name}</BigTitle>
                   </Info>
@@ -481,7 +485,7 @@ function Tv() {
                 topRatedNextBtn
               )}
               {slide(
-                "AiringToday",
+                "Airing Today",
                 "doday",
                 nowIndex,
                 airingTodayData,

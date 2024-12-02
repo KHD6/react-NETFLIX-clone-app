@@ -123,26 +123,59 @@ export function getTvAiringToday() {
 
 export function getTvTopRated() {
   const options = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZGUxZjI5YTVlMGQxY2VjNmVkYTYzMmMwNTVkYmE3YyIsIm5iZiI6MTczMjcwMjgzMC4xMjI2MzkyLCJzdWIiOiI2NzNiNTBjMzgzYjY2NmE0ZTlhMmRhMDMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Z8xLPlJKKTLtrJqRULsSLIapWcET3gyVaBGFScHZaIk'
-    }
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZGUxZjI5YTVlMGQxY2VjNmVkYTYzMmMwNTVkYmE3YyIsIm5iZiI6MTczMjcwMjgzMC4xMjI2MzkyLCJzdWIiOiI2NzNiNTBjMzgzYjY2NmE0ZTlhMmRhMDMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Z8xLPlJKKTLtrJqRULsSLIapWcET3gyVaBGFScHZaIk",
+    },
   };
-  
-  return fetch(`${BASE_PATH}/tv/top_rated?language=ko-KR&page=1`, options)
-    .then(res => res.json())
+
+  return fetch(`${BASE_PATH}/tv/top_rated?language=ko-KR&page=1`, options).then(
+    (res) => res.json()
+  );
 }
 
-  export function getTvDetails(id: number) {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZGUxZjI5YTVlMGQxY2VjNmVkYTYzMmMwNTVkYmE3YyIsIm5iZiI6MTczMjcwMjgzMC4xMjI2MzkyLCJzdWIiOiI2NzNiNTBjMzgzYjY2NmE0ZTlhMmRhMDMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Z8xLPlJKKTLtrJqRULsSLIapWcET3gyVaBGFScHZaIk'
-      }
-    };
-    
-    return fetch(`${BASE_PATH}/tv/${id}?language=ko-KR`, options)
-      .then(res => res.json())
-  }
+export function getTvDetails(id: number) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZGUxZjI5YTVlMGQxY2VjNmVkYTYzMmMwNTVkYmE3YyIsIm5iZiI6MTczMjcwMjgzMC4xMjI2MzkyLCJzdWIiOiI2NzNiNTBjMzgzYjY2NmE0ZTlhMmRhMDMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Z8xLPlJKKTLtrJqRULsSLIapWcET3gyVaBGFScHZaIk",
+    },
+  };
+
+  return fetch(`${BASE_PATH}/tv/${id}?language=ko-KR`, options).then((res) =>
+    res.json()
+  );
+}
+
+interface IGetSearchResults {
+  name?: string;
+  title?: string;
+  backdrop_path: string;
+  overview: string;
+  id: number;
+  media_type: string;
+}
+
+export interface IGetSearch {
+  results: IGetSearchResults[];
+}
+
+export function getMultiSearch(id: string) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZGUxZjI5YTVlMGQxY2VjNmVkYTYzMmMwNTVkYmE3YyIsIm5iZiI6MTczMTk0MDU0Ny42NTEsInN1YiI6IjY3M2I1MGMzODNiNjY2YTRlOWEyZGEwMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EegIY8e4avx-VLmfp8IzGXTrZQp88Afk4NsXKQ2h0F8",
+    },
+  };
+
+  return fetch(
+    `${BASE_PATH}/search/multi?query=${id}&include_adult=false&language=ko-KR&page=1`,
+    options
+  ).then((res) => res.json());
+}
