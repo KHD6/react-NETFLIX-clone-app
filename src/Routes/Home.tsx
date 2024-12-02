@@ -416,7 +416,7 @@ function Home() {
                   </OverviewOriginalTitle>
                   <OverviewTime>
                     <span>{detailsData?.release_date}</span>{" "}
-                    <span>{detailsData?.runtime} 분</span>
+                    <span>/ {detailsData?.runtime} 분</span>
                   </OverviewTime>
                   <OverviewStars className="star-rating">
                     {renderStars(detailsData?.vote_average ?? 0)}(

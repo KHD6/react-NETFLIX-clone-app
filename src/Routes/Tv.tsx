@@ -124,10 +124,10 @@ function Tv() {
   }, []);
   const navigate = useNavigate();
   const bigAiringTodayMatch = useMatch(
-    "/react-NETFLIX-clone-app/tv/AiringToday/:movieId" //수정예정
+    "/react-NETFLIX-clone-app/tv/AiringToday/:movieId"
   );
   const bigTopRatedMovieMatch = useMatch(
-    "/react-NETFLIX-clone-app/tv/toprated/:movieId" //수정예정
+    "/react-NETFLIX-clone-app/tv/toprated/:movieId"
   );
   const [leaving, setLeaving] = useState(false);
   const windowWidth = useWindowWidth();
@@ -205,19 +205,13 @@ function Tv() {
   const toggleLeaving = () => setLeaving((prev) => !prev);
 
   const onairingTodayBoxClicked = (movieId: number) => {
-    navigate(`/react-NETFLIX-clone-app/tv/AiringToday/${movieId}`); //수정예정
+    navigate(`/react-NETFLIX-clone-app/tv/AiringToday/${movieId}`);
     setChoiceMovie("now");
     setSelectedMovieId(movieId);
   };
 
-  const ononTheAirBoxClicked = (movieId: number) => {
-    navigate(`/react-NETFLIX-clone-app/tv/onTheAir/${movieId}`); //수정예정
-    setChoiceMovie("onTheAir");
-    setSelectedMovieId(movieId);
-  };
-
   const onTopRatedBoxClicked = (movieId: number) => {
-    navigate(`/react-NETFLIX-clone-app/tv/toprated/${movieId}`); //수정예정
+    navigate(`/react-NETFLIX-clone-app/tv/toprated/${movieId}`);
     setChoiceMovie("toprated");
     setSelectedMovieId(movieId);
   };

@@ -87,7 +87,7 @@ function Search() {
     );
   const { data: movieDetailsData, isLoading: movieDetailsLoading } =
     useQuery<IGetMoviesDetails>(
-      ["detailsData", selectedMovieId],
+      ["movieDetailsData", selectedMovieId],
       () => getMoviesDetails(selectedMovieId!),
       {
         enabled: selectedMovieId !== null,
@@ -95,7 +95,7 @@ function Search() {
     );
   const { data: TvDetailsData, isLoading: TvDetailsLoading } =
     useQuery<IGetMoviesDetails>(
-      ["detailsData", selectedMovieId],
+      ["tvDetailsData", selectedMovieId],
       () => getTvDetails(selectedMovieId!),
       {
         enabled: selectedMovieId !== null,
@@ -242,7 +242,7 @@ function Search() {
                     </OverviewOriginalTitle>
                     <OverviewTime>
                       <span>{movieDetailsData?.release_date}</span>{" "}
-                      <span>{movieDetailsData?.runtime} 분</span>
+                      <span>/ {movieDetailsData?.runtime} 분</span>
                     </OverviewTime>
                     <OverviewStars className="star-rating">
                       {renderStars(movieDetailsData?.vote_average ?? 0)}(
@@ -261,7 +261,8 @@ function Search() {
                 </DetailBox>
               </>
             )
-          ) : choiceType === "tv" ? (
+          ) : null}
+          {choiceType === "tv" ? (
             TvDetailsLoading ? (
               <Loader>Loading...</Loader>
             ) : (
@@ -304,12 +305,11 @@ function Search() {
                   <Inner className="inner">
                     <OverviewTitle>{TvDetailsData?.name}</OverviewTitle>
                     <OverviewOriginalTitle>
-                      <span>( 원어 : {TvDetailsData?.original_title})</span>
+                      <span>( 원어 : {TvDetailsData?.original_name})</span>
                       <span>{TvDetailsData?.original_language}</span>
                     </OverviewOriginalTitle>
                     <OverviewTime>
                       <span>{TvDetailsData?.release_date}</span>{" "}
-                      <span>{TvDetailsData?.runtime} 분</span>
                     </OverviewTime>
                     <OverviewStars className="star-rating">
                       {renderStars(TvDetailsData?.vote_average ?? 0)}(
@@ -320,9 +320,7 @@ function Search() {
                         <li key={genre.id}>「{genre.name}」</li>
                       ))}
                     </OverviewGenres>
-                    <OverviewTagline>
-                      {TvDetailsData?.tagline}
-                    </OverviewTagline>
+                    <OverviewTagline>{TvDetailsData?.tagline}</OverviewTagline>
                     <Overviewtxt>{TvDetailsData?.overview}</Overviewtxt>
                   </Inner>
                 </DetailBox>
