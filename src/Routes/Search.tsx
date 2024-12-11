@@ -333,7 +333,7 @@ function Search() {
   };
 
   return (
-    <div>
+    <>
       {multiSearchLoading ? (
         <Loader>Loading...</Loader>
       ) : (
@@ -438,7 +438,7 @@ function Search() {
           </AnimatePresence>
         </>
       )}
-    </div>
+    </>
   );
 }
 

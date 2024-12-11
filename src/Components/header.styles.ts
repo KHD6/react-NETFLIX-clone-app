@@ -10,7 +10,6 @@ export const TopHeader = styled(motion.header)`
   font-size: 16px;
   padding: 20px 0;
   z-index: 9999;
-  overflow: hidden;
 `;
 
 export const Nav = styled.nav`

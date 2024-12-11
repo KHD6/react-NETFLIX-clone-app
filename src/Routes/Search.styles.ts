@@ -24,7 +24,10 @@ export const SearchTitle = styled(motion.div)`
 `;
 
 export const SearchBox = styled.div`
-margin-bottom: 100px;
+  position: relative;
+  @media screen and (min-width: 1024px) {
+    top: -150px;
+  }
 `;
 
 export const SearchList = styled(motion.div)<{ bgphoto: string }>`

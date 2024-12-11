@@ -153,6 +153,7 @@ export const DetailsBtn = styled.button`
 
 export const ContentBox = styled.div`
   position: relative;
+  overflow-x: hidden;
   @media screen and (min-width: 1024px) {
     top: -150px;
   }
@@ -538,15 +539,15 @@ export const OverviewGenres = styled.ul`
   font-size: 18px;
   @media screen and (min-width: 768px) {
     width: calc(100% - 290px);
-    margin: 0 0 10px 220px;
+    margin: 0 0 60px 220px;
     grid-template-columns: repeat(2, 2fr);
   }
   @media screen and (min-width: 1024px) {
     width: calc(100% - 290px);
-    margin: 0 0 40px 305px;
+    margin: 0 0 90px 305px;
   }
   @media screen and (min-width: 1440px) {
-    margin: 0 0 80px 305px;
+    margin: 0 0 130px 305px;
     grid-template-columns: repeat(3, 2fr);
   }
   @media screen and (min-width: 1920px) {

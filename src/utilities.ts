@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Inner = styled.div`
 margin: 0  30px;
+
 @media screen and (min-width: 768px){
   margin: 0  45px;
 }
